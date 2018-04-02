@@ -16,8 +16,11 @@ a_ = []
 c_ = []
 pi_ = []
 qi_ = []
+first_ = []
+second_ = []
+two = 2
 
-n = 78971
+n = 42
 P0 = 0
 Q0 = 1
 alpha = math.sqrt(n)
@@ -32,6 +35,16 @@ P = P0
 Q = Q0
 
 print('n: ', n)
+
+
+while(n%2 == 0):
+    first_.append(two)
+    second_.append(int(n/2))
+    two = two*2
+    n = int(n/2)
+
+
+
 
 while(1):
     P_next = a*Q - P
@@ -89,11 +102,24 @@ print(qi_)
 print('\n')
 
 
+
+
 for i in range(len(result)):
-    print('First factor:')
-    print(math.gcd(result_pi[i] - result[i], n))
-    print('Second factor')
-    print(math.gcd(result_pi[i] + result[i], n))
+    first = math.gcd(result_pi[i] - result[i], n)
+    second = math.gcd(result_pi[i] + result[i], n)
+    if first != 1 and second != 1:
+        first_.append(first)
+        second_.append(second)
+
+for f in first_:
+    if f in second_ or first_.count(f) > 1:
+        del second_[first_.index(f)]
+        del first_[first_.index(f)]
+
+        
+for i in range(len(first_)):
+    print('First factor: ', first_[i])
+    print('Second factor: ', second_[i])
 
 
 
