@@ -23,6 +23,7 @@ two = 2
 num = 0
 result_pi = []
 result = []
+
 n = 64
 P0 = 0
 Q0 = 1
@@ -46,10 +47,10 @@ def printResult():
         if first != 1 and second != 1:
             first_.append(first)
             second_.append(second)
-        for f in first_:
-            if f in second_ or first_.count(f) > 1:
-                del second_[first_.index(f)]
-                del first_[first_.index(f)]
+    for f in first_:
+        if f in second_ or first_.count(f) > 1:
+            del second_[first_.index(f)]
+            del first_[first_.index(f)]
     for i in range(len(first_)):
         print('First factor: ', first_[i])
         print('Second factor: ', second_[i])
@@ -57,8 +58,9 @@ def printResult():
         
         
 while(n%2 == 0):
-    first_.append(two)
-    second_.append(int(n/2))
+    if int(n/2) != 1 and int(n/2) not in first_:
+        first_.append(two)
+        second_.append(int(n/2))
     two = two*2
     n = int(n/2)
 
