@@ -10,6 +10,7 @@ import math
 import sys
 
 
+
 alpha_ = []
 P_ = []
 Q_ = []
@@ -24,21 +25,16 @@ num = 0
 result_pi = []
 result = []
 
-n = 64
+n = 157942
+print('n: ', n)
+
+
+
+
+
+
 P0 = 0
 Q0 = 1
-alpha = math.sqrt(n)
-a = math.floor(alpha)
-
-alpha_.append(alpha)
-P_.append(P0)
-Q_.append(Q0)
-a_.append(a)
-
-P = P0
-Q = Q0
-
-print('n: ', n)
 
 def printResult():
     for i in range(len(result)):
@@ -55,25 +51,42 @@ def printResult():
         print('First factor: ', first_[i])
         print('Second factor: ', second_[i])
         
-        
-        
-while(n%2 == 0):
+
+
+while(math.fmod(n,2) == 0):
     if int(n/2) != 1 and int(n/2) not in first_:
         first_.append(two)
         second_.append(int(n/2))
-    two = two*2
-    n = int(n/2)
-
+        two = two*2
+        n = int(n/2)   
 if n==1:
     printResult()
     sys.exit()
+        
+
+
+alpha = math.sqrt(n)
+a = math.floor(alpha)
+
+alpha_.append(alpha)
+P_.append(P0)
+Q_.append(Q0)
+a_.append(a)
+
+P = P0
+Q = Q0
+
+
+
+        
+        
 
 while(1):
     P_next = a*Q - P
     Q_next = (n-math.pow(P_next, 2))/Q
     alpha = (P_next + math.sqrt(n))/Q_next
     a = math.floor(alpha)
-    if alpha in alpha_ and a in a_:
+    if alpha in alpha_:
         break;
     else:
         P = P_next
