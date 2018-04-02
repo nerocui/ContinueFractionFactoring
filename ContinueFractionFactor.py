@@ -17,7 +17,7 @@ c_ = []
 pi_ = []
 qi_ = []
 
-n = 21
+n = 78971
 P0 = 0
 Q0 = 1
 alpha = math.sqrt(n)
@@ -63,8 +63,8 @@ for aa in a_:
     i+=1
 
 num = 0
-result_pi = 0
-result = 0
+result_pi = []
+result = []
 
 
 def is_square(number):
@@ -78,8 +78,8 @@ for c in c_:
     qi_.append(c.denominator)
     num = c.numerator ** 2 - n*(c.denominator ** 2)
     if num > 0 and num != 0 and is_square(num):
-        result = int(math.sqrt(num))
-        result_pi = c.numerator
+        result.append(int(math.sqrt(num)))
+        result_pi.append(c.numerator)
     
 
 print('pi:')
@@ -87,10 +87,13 @@ print(pi_)
 print('qi:')
 print(qi_)
 print('\n')
-print('First factor:')
-print(math.gcd(result_pi - result, n))
-print('Second factor')
-print(math.gcd(result_pi + result, n))
+
+
+for i in range(len(result)):
+    print('First factor:')
+    print(math.gcd(result_pi[i] - result[i], n))
+    print('Second factor')
+    print(math.gcd(result_pi[i] + result[i], n))
 
 
 
