@@ -7,6 +7,7 @@ Created on Sun Apr  1 15:02:59 2018
 
 from fractions import Fraction
 import math
+import sys
 
 
 alpha_ = []
@@ -19,8 +20,10 @@ qi_ = []
 first_ = []
 second_ = []
 two = 2
-
-n = 42
+num = 0
+result_pi = []
+result = []
+n = 64
 P0 = 0
 Q0 = 1
 alpha = math.sqrt(n)
@@ -36,15 +39,32 @@ Q = Q0
 
 print('n: ', n)
 
-
+def printResult():
+    for i in range(len(result)):
+        first = math.gcd(result_pi[i] - result[i], n)
+        second = math.gcd(result_pi[i] + result[i], n)
+        if first != 1 and second != 1:
+            first_.append(first)
+            second_.append(second)
+        for f in first_:
+            if f in second_ or first_.count(f) > 1:
+                del second_[first_.index(f)]
+                del first_[first_.index(f)]
+    for i in range(len(first_)):
+        print('First factor: ', first_[i])
+        print('Second factor: ', second_[i])
+        
+        
+        
 while(n%2 == 0):
     first_.append(two)
     second_.append(int(n/2))
     two = two*2
     n = int(n/2)
 
-
-
+if n==1:
+    printResult()
+    sys.exit()
 
 while(1):
     P_next = a*Q - P
@@ -70,14 +90,11 @@ def getC(array):
 print('a:')
 print(a_)
 
-i = 1
-for aa in a_:
-    c_.append(Fraction(a_[0]+getC(a_[1:i])))
-    i+=1
 
-num = 0
-result_pi = []
-result = []
+for i in range(len(a_)):
+    c_.append(Fraction(a_[0]+getC(a_[1:i])))
+
+
 
 
 def is_square(number):
@@ -103,23 +120,11 @@ print('\n')
 
 
 
+printResult()
 
-for i in range(len(result)):
-    first = math.gcd(result_pi[i] - result[i], n)
-    second = math.gcd(result_pi[i] + result[i], n)
-    if first != 1 and second != 1:
-        first_.append(first)
-        second_.append(second)
-
-for f in first_:
-    if f in second_ or first_.count(f) > 1:
-        del second_[first_.index(f)]
-        del first_[first_.index(f)]
 
         
-for i in range(len(first_)):
-    print('First factor: ', first_[i])
-    print('Second factor: ', second_[i])
+
 
 
 
