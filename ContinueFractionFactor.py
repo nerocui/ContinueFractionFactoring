@@ -21,6 +21,7 @@ qi_ = []
 first_ = []
 second_ = []
 two = 2
+two_ = 0
 num = 0
 result_pi = []
 result = []
@@ -28,25 +29,15 @@ result = []
 n = 157942
 print('n: ', n)
 
-
-
-
-
-
 P0 = 0
 Q0 = 1
 
 def printResult():
-    for i in range(len(result)):
-        first = math.gcd(result_pi[i] - result[i], n)
-        second = math.gcd(result_pi[i] + result[i], n)
-        if first != 1 and second != 1:
-            first_.append(first)
-            second_.append(second)
     for f in first_:
         if f in second_ or first_.count(f) > 1:
-            del second_[first_.index(f)]
-            del first_[first_.index(f)]
+            if first_.index(f) != second_.index(f):
+                del second_[first_.index(f)]
+                del first_[first_.index(f)]
     for i in range(len(first_)):
         print('First factor: ', first_[i])
         print('Second factor: ', second_[i])
@@ -57,8 +48,10 @@ while(math.fmod(n,2) == 0):
     if int(n/2) != 1 and int(n/2) not in first_:
         first_.append(two)
         second_.append(int(n/2))
-        two = two*2
-        n = int(n/2)   
+    two = two*2
+    n = int(n/2)
+    two_ += 1
+        
 if n==1:
     printResult()
     sys.exit()
@@ -118,6 +111,8 @@ def is_square(number):
     else:
         return True
 
+
+
 for c in c_:
     pi_.append(c.numerator)
     qi_.append(c.denominator)
@@ -133,11 +128,24 @@ print('qi:')
 print(qi_)
 print('\n')
 
+temp_first_ = []
+temp_second_ = []
+
+for i in range(len(result)):
+    first = math.gcd(result_pi[i] - result[i], n)
+    second = math.gcd(result_pi[i] + result[i], n)
+    if first != 1 and second != 1:
+        temp_first_.append(first)
+        temp_second_.append(second)
+
+
+for t in range(two_):
+    for i in range(len(temp_first_)):
+        first_.append(int(temp_first_[i] * math.pow(2,t)))
+        second_.append(int(temp_second_[i]*math.pow(2, two_ - t)))
 
 
 printResult()
-
-
         
 
 
